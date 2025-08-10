@@ -2,12 +2,54 @@ import React, { useContext, useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import { motion } from 'framer-motion'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 
 const Login = () => {
     const [signIn, setSignIn] = useState(true)
-    const { setShowLogin } = useContext(AppContext)
+    const { setShowLogin, backendUrl, setUser, setToken } = useContext(AppContext)
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const submitForm = async (e) => {
+        e.preventDefault()
+
+        try {
+            if (signIn) {
+                const { data } = await axios.post(backendUrl + '/api/user/login', { email, password })
+
+                if (data.success) {
+                    setUser(data.user)
+                    setToken(data.token)
+                    localStorage.setItem('token', data.token)
+                    setShowLogin(false)
+                }
+                else {
+                    toast.error(data.message)
+                }
+            }
+            else {
+                const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password })
+
+                if (data.success) {
+                    setUser(data.user)
+                    setToken(data.token)
+                    localStorage.setItem('token', data.token)
+                    setShowLogin(false)
+                }
+                else {
+
+                    toast.error(data.message)
+                }
+            }
+        } catch (error) {
+            console.log(error.message)
+            toast.error(error.message)
+        }
+    }
 
     useEffect(() => {
         document.body.style.overflow = 'hidden'
@@ -20,36 +62,37 @@ const Login = () => {
         <div className='fixed top-0 bottom-0 left-0 right-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center'>
 
             <motion.form
-            initial={{ opacity: 0, y: 50 }}
-            transition={{ duration: 0.3 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} 
-            className='relative bg-white p-10 rounded-xl text-slate-500'>{
-                signIn ? (
-                    <>
-                        <h1 className='text-center text-2xl text-neutral-700 font-medium'>Login</h1>
-                        <p className='text-sm mt-2'>Welcome back! please sign in to continue</p>
-                    </>
-                ) : (
-                    <>
-                        <h1 className='text-center text-2xl text-neutral-700 font-medium'>Sign Up</h1>
-                        <p className='text-sm mt-2'>Welcome ! please create an account to continue</p>
-                    </>
-                )
-            }
+                onSubmit={submitForm}
+                initial={{ opacity: 0, y: 50 }}
+                transition={{ duration: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className='relative bg-white p-10 rounded-xl text-slate-500'>{
+                    signIn ? (
+                        <>
+                            <h1 className='text-center text-2xl text-neutral-700 font-medium'>Login</h1>
+                            <p className='text-sm mt-2'>Welcome back! please sign in to continue</p>
+                        </>
+                    ) : (
+                        <>
+                            <h1 className='text-center text-2xl text-neutral-700 font-medium'>Sign Up</h1>
+                            <p className='text-sm mt-2'>Welcome ! please create an account to continue</p>
+                        </>
+                    )
+                }
 
 
                 {!signIn && (<div className='border px-5 py-2 flex items-center gap-2 rounded-full mt-5'>
                     <img src={assets.profile_icon} alt='' width={25} />
-                    <input type='text' placeholder='Username' className='outline-none text-sm' required />
+                    <input onChange={e => setName(e.target.value)} value={name} type='text' placeholder='Username' className='outline-none text-sm' required />
                 </div>)}
                 <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-4'>
                     <img src={assets.email_icon} alt='' />
-                    <input type='email' placeholder='example@gmail.com' className='outline-none text-sm' required />
+                    <input onChange={e => setEmail(e.target.value)} value={email} type='email' placeholder='example@gmail.com' className='outline-none text-sm' required />
                 </div>
                 <div className='border px-6 py-2 flex items-center gap-2 rounded-full mt-4'>
                     <img src={assets.lock_icon} alt='' />
-                    <input type='password' placeholder='********' className='outline-none text-sm' required />
+                    <input onChange={e => setPassword(e.target.value)} value={password} type='password' placeholder='********' className='outline-none text-sm' required />
                 </div>
 
                 {signIn && (<p className='text-sm text-blue-600 my-4 cursor-pointer'>Forgot Password?</p>)}

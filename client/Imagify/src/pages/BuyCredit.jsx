@@ -3,9 +3,73 @@ import { assets } from '../assets/assets'
 import { plans } from '../assets/assets'
 import { AppContext } from '../context/AppContext'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const BuyCredit = () => {
-  const { user } = useContext(AppContext)
+  const { user, backendUrl, loadCredits, token, setShowlogin } = useContext(AppContext)
+  const navigate = useNavigate()
+
+  const initPay = async (order) => {
+    try {
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'Credits Payment',
+        description: 'Payment for buying credits in Imagify',
+        order_id: order.id,
+        receipt: order.receipt,
+        handler: async (res) => {
+          try {
+            const { data } = await axios.post(backendUrl + "/api/user/verify-razor", res, {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            })
+            if (data.success) {
+              loadCredits()
+              navigate('/')
+              toast.success("Credit Added")
+            }
+
+          } catch (error) {
+            toast.error(error.message)
+          }
+        }
+      }
+      const rzp = new window.Razorpay(options)
+      rzp.open()
+
+    } catch (error) {
+      toast.error(error)
+    }
+  }
+
+  const paymentRazorPay = async (planId) => {
+    try {
+      if (!user) {
+        setShowlogin(true)
+      }
+      else {
+        const { data } = await axios.post(backendUrl + "/api/user/pay-razor", { planId }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+
+        if (data.success) {
+          initPay(data.order)
+        } else {
+          toast.error(data.message)
+        }
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
   return (
     <motion.div
@@ -29,7 +93,7 @@ const BuyCredit = () => {
             <p className='text-sm'>{plan.desc}</p>
             <p className='mt-6'><span className='text-3xl font-medium'> ${plan.price}
             </span> / {plan.credits} credits</p>
-            <button className=' w-full bg-gray-800 text-white mt-8 text-sm rounded-md py-2.5 min-w-52'>
+            <button onClick={() => paymentRazorPay(plan.id)} className=' w-full bg-gray-800 text-white mt-8 text-sm rounded-md py-2.5 min-w-52'>
               {user ? 'Purchase' : 'Get Started'}
             </button>
           </div>
