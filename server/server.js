@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(cors())
 
 
-app.use(userRouter) 
+app.use('/api/user',userRouter) 
 app.use('/api/image',imageRouter) 
 
 app.get('/api', (req, res) => {
