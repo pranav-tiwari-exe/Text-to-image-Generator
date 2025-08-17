@@ -11,12 +11,12 @@ const AppContextProvider = (props) => {
     const [showLogin, setShowLogin] = useState(false)
     const [token, setToken] = useState(localStorage.getItem('token') || null)
     const [credit, setCredit] = useState(false)
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    // const backendUrl = import.meta.env.VITE_BACKEND_URL
     const navigate = useNavigate()
 
     const loadCredits = async () => {
         try {
-            const { data } = await axios.get(backendUrl + '/api/user/credits', {
+            const { data } = await axios.get( '/api/user/credits', {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 }
@@ -35,7 +35,7 @@ const AppContextProvider = (props) => {
 
     const generateImage = async (prompt) => {
         try {
-            const { data } = await axios.post(backendUrl + '/api/image/generate-image', { prompt }, {
+            const { data } = await axios.post('/api/image/generate-image', { prompt }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
