@@ -20,7 +20,7 @@
     },
     {
       "source": "/(.*)",
-      "destination": "/client/Imagify/dist/index.html"
+      "destination": "/index.html"
     }
   ]
 }
