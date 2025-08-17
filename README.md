@@ -1,19 +1,17 @@
 # Text-to-Image Generator
-![Project: Text-to-Image Generator](https://img.shields.io/badge/Text--to--Image%20Generator-Project-green?style=for-the-badge)
-![Status](https://img.shields.io/badge/status-Completed-green)
-
 
 ---
 
-<p align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/3269842/express-icon-md.png" alt="express" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://www.pngrepo.com/png/354431/180/tailwindcss-icon.png" alt="tailwind" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40" style="margin-right: 50px;"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/>
+<p align="center">
+  <img alt="React" src="https://img.shields.io/badge/React-?logo=react&style=for-the-badge" />
+  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-?logo=node.js&style=for-the-badge" />
+  <img alt="Express" src="https://img.shields.io/badge/Express-?logo=express&style=for-the-badge" />
+  <img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-?logo=mongodb&style=for-the-badge" />
+  <img alt="Tailwind" src="https://img.shields.io/badge/TailwindCSS-?logo=tailwindcss&style=for-the-badge" />
+  <img alt="Framer Motion" src="https://img.shields.io/badge/Framer%20Motion-?logo=framer&style=for-the-badge" />
+  <img alt="Axios" src="https://img.shields.io/badge/Axios-?logo=axios&style=for-the-badge" />
+  <img alt="JWT" src="https://img.shields.io/badge/JWT-?logo=jsonwebtokens&style=for-the-badge" />
+  <img alt="bcrypt" src="https://img.shields.io/badge/bcrypt-?logo=bcrypt&style=for-the-badge" />
 </p>
 
 ---
