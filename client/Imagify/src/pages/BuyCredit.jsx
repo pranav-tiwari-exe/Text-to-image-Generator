@@ -8,7 +8,8 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 
 const BuyCredit = () => {
-  const { user, backendUrl, loadCredits, token, setShowlogin } = useContext(AppContext)
+  // const { user, backendUrl, loadCredits, token, setShowlogin } = useContext(AppContext)
+  const { user, loadCredits, token, setShowlogin } = useContext(AppContext)
   const navigate = useNavigate()
 
   const initPay = async (order) => {
@@ -23,7 +24,7 @@ const BuyCredit = () => {
         receipt: order.receipt,
         handler: async (res) => {
           try {
-            const { data } = await axios.post(backendUrl + "/api/user/verify-razor", res, {
+            const { data } = await axios.post("/api/user/verify-razor", res, {
               headers: {
                 Authorization: `Bearer ${token}`
               }
@@ -53,7 +54,7 @@ const BuyCredit = () => {
         setShowlogin(true)
       }
       else {
-        const { data } = await axios.post(backendUrl + "/api/user/pay-razor", { planId }, {
+        const { data } = await axios.post("/api/user/pay-razor", { planId }, {
           headers: {
             Authorization: `Bearer ${token}`
           }
