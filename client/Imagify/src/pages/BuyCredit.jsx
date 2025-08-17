@@ -8,7 +8,12 @@ import { toast } from 'react-toastify'
 import axios from 'axios'
 
 const BuyCredit = () => {
+<<<<<<< HEAD
   const { user, backendUrl, loadCredits, token, setShowlogin } = useContext(AppContext)
+=======
+  // const { user, backendUrl, loadCredits, token, setShowlogin } = useContext(AppContext)
+  const { user, loadCredits, token, setShowlogin } = useContext(AppContext)
+>>>>>>> 28facbe6402e03d978dbdc03af728115ae9780d1
   const navigate = useNavigate()
 
   const initPay = async (order) => {
@@ -23,7 +28,11 @@ const BuyCredit = () => {
         receipt: order.receipt,
         handler: async (res) => {
           try {
+<<<<<<< HEAD
             const { data } = await axios.post(backendUrl + "/api/user/verify-razor", res, {
+=======
+            const { data } = await axios.post("/api/user/verify-razor", res, {
+>>>>>>> 28facbe6402e03d978dbdc03af728115ae9780d1
               headers: {
                 Authorization: `Bearer ${token}`
               }
@@ -53,7 +62,11 @@ const BuyCredit = () => {
         setShowlogin(true)
       }
       else {
+<<<<<<< HEAD
         const { data } = await axios.post(backendUrl + "/api/user/pay-razor", { planId }, {
+=======
+        const { data } = await axios.post("/api/user/pay-razor", { planId }, {
+>>>>>>> 28facbe6402e03d978dbdc03af728115ae9780d1
           headers: {
             Authorization: `Bearer ${token}`
           }
