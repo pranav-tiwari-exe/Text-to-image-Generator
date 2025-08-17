@@ -75,7 +75,6 @@ const AppContextProvider = (props) => {
         setUser,
         showLogin,
         setShowLogin,
-        backendUrl,
         token,
         setToken,
         credit,
