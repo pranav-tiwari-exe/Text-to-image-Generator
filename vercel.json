@@ -1,28 +1,12 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "builds": [
-    {
-      "src": "client/Imagify/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "buildCommand": "npm install && npm run build",
-        "outputDirectory": "dist"
-      }
-    },
     {
       "src": "server/server.js",
       "use": "@vercel/node"
     }
   ],
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/server/server.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/client/Imagify/dist/index.html"
-    }
+  "routes": [
+    { "src": "/api/(.*)", "dest": "server/server.js" }
   ]
 }
