@@ -17,10 +17,6 @@
     {
       "source": "/api/(.*)",
       "destination": "/server/server.js"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/client/Imagify/index.html"
     }
   ]
 }
