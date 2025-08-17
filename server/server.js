@@ -13,7 +13,7 @@ app.use(cors())
 
 
 app.use(userRouter) 
-app.use(imageRouter) 
+app.use('/api/image',imageRouter) 
 
 app.get('/api', (req, res) => {
   res.send('Hello from API!');
