@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 
 const Login = () => {
     const [signIn, setSignIn] = useState(true)
-    const { setShowLogin, setUser, setToken } = useContext(AppContext)
+    const { setShowLogin, setUser, setToken, backendUrl } = useContext(AppContext)
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -19,7 +19,7 @@ const Login = () => {
 
         try {
             if (signIn) {
-                const { data } = await axios.post('/api/user/login', { email, password })
+                const { data } = await axios.post(backendUrl + '/api/user/login', { email, password })
 
                 if (data.success) {
                     setUser(data.user)
@@ -32,7 +32,7 @@ const Login = () => {
                 }
             }
             else {
-                const { data } = await axios.post('/api/user/register', { name, email, password })
+                const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password })
 
                 if (data.success) {
                     setUser(data.user)
